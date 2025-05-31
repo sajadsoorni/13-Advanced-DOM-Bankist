@@ -111,12 +111,10 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 // menu fade animation
-const handleHover = function (e, opacity) {
-  console.log(this, e.currentTarget);
+const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-    console.log(siblings);
     const logo = link.closest('.nav').querySelector('img');
 
     siblings.forEach(el => {
@@ -130,6 +128,16 @@ const handleHover = function (e, opacity) {
 // Passing "argument" into handler
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+window.addEventListener('scroll', function (e) {
+  console.log(window.scrollY);
+  console.log(initialCoords);
+
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+});
 
 //////////////////////////////////////////
 //////////////////////////////////////////
